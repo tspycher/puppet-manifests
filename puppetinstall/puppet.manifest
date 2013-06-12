@@ -1,0 +1,78 @@
+class puppetserver {
+	package { "puppet-server":
+		ensure                         => installed,
+	}
+	package { "puppet-dashboard":
+		ensure				=> installed,
+	}
+	package { "mysql":
+		ensure				=> installed,
+	}
+	package { "mysql-server":
+		ensure				=> installed,
+	}
+	package { "ruby-mysql":
+		ensure				=> installed,
+	}
+	service { "puppetmaster":
+		ensure				=> running,
+	}
+	service { "puppet-dashboard":
+		ensure				=> running,
+		require                         => Exec["load_database"],
+	}
+	service { "mysqld":
+		ensure				=> running,
+	}
+	service { "puppet-dashboard-workers":
+		ensure				=> running,
+		require				=> Service['puppet-dashboard'],
+	}
+	service { "iptables":
+  		ensure => "stopped",
+	}
+	file { "/usr/share/puppet-dashboard/config/database.yml":
+		ensure => "present",
+          	mode   => 644,
+        	source => "file:///root/puppet/database.yml",
+	}
+	file { "/usr/share/puppet-dashboard/config/settigns.yml":
+                ensure => "present",
+                mode   => 644,
+                source => "file:///root/puppet/settings.yml",
+        }
+        file { "/etc/puppet/puppet.conf":
+                ensure => "present",
+                mode   => 644,
+                source => "file:///root/puppet/puppet.conf",
+        }
+
+	file { [ "/var/lib/puppet/lib/puppet", "/var/lib/puppet/lib/puppet/reports" ]:
+		ensure => "directory",
+                mode   => 755,
+	}
+	file { "/var/lib/puppet/lib/puppet/reports/puppet_dashboard.rb":
+		ensure => "present",
+		source => "file:///usr/share/puppet-dashboard/ext/puppet/puppet_dashboard.rb",
+	}
+
+	## LOADING DEFAULT DATABASE
+	exec { "create_database":
+		command => "/usr/bin/mysql < /root/puppet/create_table.sql",
+		creates => "/var/lib/mysql/dashboard"
+	}
+        exec { "refresh_specs":
+                command => "/usr/bin/rake gems:refresh_specs",
+                cwd => "/usr/share/puppet-dashboard/",
+        }
+
+	exec { "load_database":
+		command => "/usr/bin/rake RAILS_ENV=production db:migrate",
+		cwd => "/usr/share/puppet-dashboard/",
+		require => [ Exec['refresh_specs'], Exec['create_database'], File["/usr/share/puppet-dashboard/config/database.yml"] ],
+	}		
+}
+
+node default {
+	include puppetserver
+}

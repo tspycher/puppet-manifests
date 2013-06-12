@@ -1,0 +1,265 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html lang='en' xml:lang='en' xmlns='http://www.w3.org/1999/xhtml'>
+<head>
+<title>Puppet Node Manager</title>
+<link href='/images/favicon.ico?1363890238' rel='shortcut icon' />
+<meta content='text/html; charset=UTF-8' http-equiv='Content-Type' />
+<script src="/javascripts/jquery.min.js?1363890238" type="text/javascript"></script>
+<script type='text/javascript'>
+  //<![CDATA[
+    var relative_url_root = '';
+    $.noConflict();
+  //]]>
+</script>
+
+<link href="/stylesheets/all.css?1363890238" media="screen" rel="stylesheet" type="text/css" />
+<script src="/javascripts/all.js?1363890238" type="text/javascript"></script>
+</head>
+<body class='with-sidebar pages_controller pages_home_action'>
+<div id='wrap'>
+<div id='skiplinkholder'>
+<a href='#skiptarget' id='skiplink'>
+Skip to main content (Press Enter).
+</a>
+
+</div>
+<div id='header'>
+<div class='topbar'>
+<div class='topbar-inner'>
+<div class='container'>
+<ul class='navigation' id='global-navigation'>
+<li id='logo'>
+<a href='/' style="background-repeat: no-repeat; text-indent: -9000px; background-image: url('/images/dashboard_logo.png'); height: 23px; width: 155px" title='Puppet Dashboard'>Puppet Dashboard</a>
+</li>
+<li class='' id='dashboard-version'>
+<a href="https://github.com/puppetlabs/puppet-dashboard/commits/1.2.23">1.2.23</a>
+</li>
+<li class='active' id='navigation-home'>
+<a href="/">Home</a>
+</li>
+<li class='' id='navigation-nodes'>
+<a href="/nodes">Nodes</a>
+</li>
+<li class='' id='navigation-groups'>
+<a href="/node_groups">Groups</a>
+</li>
+<li class='' id='navigation-classes'>
+<a href="/node_classes">Classes</a>
+</li>
+<li class='' id='navigation-reports'>
+<a href="/reports">Reports</a>
+</li>
+<li class='' id='navigation-file-search'>
+<a href="/reports/search">File Search</a>
+</li>
+<li id='navigation-autorefresh'>
+<a href="/?autorefresh=true" class="autorefresh_link">Enable autorefresh</a>
+</li>
+</ul>
+</div>
+</div>
+</div>
+
+</div>
+<div id='content'>
+<div id='sidebar'><div class='group delayed-job'>
+<h3><a href="/delayed_job_failures">Background Tasks</a></h3>
+<p class='ok'>
+<em>All systems go</em>
+</p>
+</div>
+<div class='group'>
+<h3 class=''><a href="/nodes">Nodes</a></h3>
+<p class='help'>
+<a href='http://links.puppetlabs.com/dashboard1.2_node_summary_help' target='_blank'>
+Help
+</a>
+</p>
+<div class='node_summary'>
+<table class='primary'>
+<tr class='unresponsive '>
+<td class='count'>
+<a href="/nodes/unresponsive">0</a>
+</td>
+<td class='label'>
+<a href="/nodes/unresponsive">Unresponsive</a>
+</td>
+<td class='percent'>
+<a href="/nodes/unresponsive" style="width: 0%">0<em>%</em></a>
+</td>
+</tr>
+<tr class='failed '>
+<td class='count'>
+<a href="/nodes/failed">0</a>
+</td>
+<td class='label'>
+<a href="/nodes/failed">Failed</a>
+</td>
+<td class='percent'>
+<a href="/nodes/failed" style="width: 0%">0<em>%</em></a>
+</td>
+</tr>
+<tr class='pending '>
+<td class='count'>
+<a href="/nodes/pending">0</a>
+</td>
+<td class='label'>
+<a href="/nodes/pending">Pending</a>
+</td>
+<td class='percent'>
+<a href="/nodes/pending" style="width: 0%">0<em>%</em></a>
+</td>
+</tr>
+<tr class='changed '>
+<td class='count'>
+<a href="/nodes/changed">0</a>
+</td>
+<td class='label'>
+<a href="/nodes/changed">Changed</a>
+</td>
+<td class='percent'>
+<a href="/nodes/changed" style="width: 0%">0<em>%</em></a>
+</td>
+</tr>
+<tr class='unchanged '>
+<td class='count'>
+<a href="/nodes/unchanged">0</a>
+</td>
+<td class='label'>
+<a href="/nodes/unchanged">Unchanged</a>
+</td>
+<td class='percent'>
+<a href="/nodes/unchanged" style="width: 0%">0<em>%</em></a>
+</td>
+</tr>
+<tr class='unreported '>
+<td class='count'>
+<a href="/nodes/unreported">0</a>
+</td>
+<td class='label'>
+<a href="/nodes/unreported">Unreported</a>
+</td>
+<td class='percent'>
+<a href="/nodes/unreported" style="width: 0%">0<em>%</em></a>
+</td>
+</tr>
+<tr class='all '>
+<td class='count'>
+<a href="/nodes">0</a>
+</td>
+<td class='label'>
+<a href="/nodes">All</a>
+</td>
+<td class='percent'>
+<a href="/nodes" style="width: 0%">0<em>%</em></a>
+</td>
+</tr>
+</table>
+</div>
+<div class='footer actionbar'>
+<div id='radiator'>
+<a href="/radiator">Radiator View</a>
+</div>
+<a href="/nodes/new" class="button">Add node</a>
+</div>
+</div>
+<div class='group'>
+<h3 class=''><a href="/node_groups">Group</a></h3>
+<div class='footer actionbar'>
+<a href="/node_groups/new" class="button">Add group</a>
+</div>
+</div>
+
+<div class='group'>
+<h3 class=''><a href="/node_classes">Class</a></h3>
+<div class='footer actionbar'>
+<a href="/node_classes/new" class="button">Add class</a>
+</div>
+</div>
+
+<div id='skiptargetholder'>
+<a id="skiptarget" name="skiptarget" class="skip" tabindex="-1"></a>
+
+</div>
+</div>
+<div id='main'>
+<div class='item'>
+<div class='section'>
+<p>There are no nodes known by Dashboard.</p>
+</div>
+<div class='section'>
+<h3>Daily run status</h3>
+<p class='legend'>Number and status of runs during the <strong>last 30 days</strong>:</p>
+<p>
+<span class='nomatches'>&mdash; No runs found to report &mdash;</span>
+</p>
+
+</div>
+</div>
+<div class='item'>
+<ul class='tabbed' id='home-tabs'>
+<li id='all-tab'>
+<a href='#'>All</a>
+</li>
+<li id='unresponsive-tab'>
+<a href='#'>Unresponsive</a>
+</li>
+<li id='failed-tab'>
+<a href='#'>Failed</a>
+</li>
+<li id='pending-tab'>
+<a href='#'>Pending</a>
+</li>
+<li id='changed-tab'>
+<a href='#'>Changed</a>
+</li>
+<li id='unchanged-tab'>
+<a href='#'>Unchanged</a>
+</li>
+</ul>
+<div class='panel' id='all'>
+<p>
+<span class='nomatches'>&mdash; No nodes found &mdash;</span>
+</p>
+
+</div>
+<div class='panel' id='unresponsive'>
+<p>
+<span class='nomatches'>&mdash; No nodes found &mdash;</span>
+</p>
+
+</div>
+<div class='panel' id='failed'>
+<p>
+<span class='nomatches'>&mdash; No nodes found &mdash;</span>
+</p>
+
+</div>
+<div class='panel' id='pending'>
+<p>
+<span class='nomatches'>&mdash; No nodes found &mdash;</span>
+</p>
+
+</div>
+<div class='panel' id='changed'>
+<p>
+<span class='nomatches'>&mdash; No nodes found &mdash;</span>
+</p>
+
+</div>
+<div class='panel' id='unchanged'>
+<p>
+<span class='nomatches'>&mdash; No nodes found &mdash;</span>
+</p>
+
+</div>
+</div>
+</div>
+
+</div>
+<div id='footer'>
+<p><a href="http://puppetlabs.com/">&copy; Copyright 2013 Puppet Labs</a></p>
+</div>
+</div>
+</body>
+</html>
