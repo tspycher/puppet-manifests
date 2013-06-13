@@ -1,0 +1,29 @@
+#!/bin/bash
+# description: Glassfish Start Stop Restart
+# processname: glassfish
+# chkconfig: 234 20 80
+JAVA_HOME=/opt/java
+export JAVA_HOME
+PATH=$JAVA_HOME/bin:$PATH
+export PATH
+GLASSFISH_HOME=/opt/glassfish
+GLASSFISH_DOMAIN=<%= scope.lookupvar('glassfish::install::domain') %>
+GLASSFISH_USER=glassfish
+ 
+iptables -t nat -A PREROUTING -p tcp -m tcp --dport 80 -j REDIRECT --to-ports 8080
+iptables -t nat -A PREROUTING -p tcp -m tcp --dport 443 -j REDIRECT --to-ports 8181
+iptables -t nat -A PREROUTING -p udp -m udp --dport 80 -j REDIRECT --to-ports 8080
+iptables -t nat -A PREROUTING -p udp -m udp --dport 443 -j REDIRECT --to-ports 8181
+
+case $1 in
+start)
+su $GLASSFISH_USER -c "sh $GLASSFISH_HOME/bin/asadmin start-domain $GLASSFISH_DOMAIN"
+;;
+stop)
+su $GLASSFISH_USER -c "sh $GLASSFISH_HOME/bin/asadmin stop-domain $GLASSFISH_DOMAIN"
+;;
+restart)
+su $GLASSFISH_USER -c "sh $GLASSFISH_HOME/bin/asadmin stop-domain $GLASSFISH_DOMAIN"
+su $GLASSFISH_USER -c "sh $GLASSFISH_HOME/bin/asadmin start-domain $GLASSFISH_DOMAIN"
+;;
+esac
