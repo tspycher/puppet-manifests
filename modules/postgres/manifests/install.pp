@@ -17,6 +17,7 @@ class postgres::install {
 		owner => "postgres",
 		group => "postgres",
 		mode => 600,
+                notify => Service['postgresql']
 	}
         service { "postgresql":
                 enable => true,

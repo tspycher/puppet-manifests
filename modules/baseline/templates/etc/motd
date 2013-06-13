@@ -1,0 +1,2 @@
+
+Server:		<%= scope.lookupvar('baseline::motd::_servername') %> 
